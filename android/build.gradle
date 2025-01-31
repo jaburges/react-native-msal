@@ -68,6 +68,10 @@ repositories {
     // Support for Android JSC
     url = "$rootDir/../node_modules/jsc-android/dist"
   }
+  maven {
+    // Facebook Maven repo for React Native
+    url = "https://mvnrepository.com/artifact/com.facebook.react/react-android"
+  }
   google()
   mavenCentral()
   maven { url = "https://www.jitpack.io" }
@@ -75,6 +79,6 @@ repositories {
 
 dependencies {
   // noinspection GradleDynamicVersion
-  implementation 'com.facebook.react:react-native:0.73.4' // From node_modules
+  implementation 'com.facebook.react:react-android:0.73.4'
   implementation 'com.microsoft.identity.client:msal:2.2.+'
 }
