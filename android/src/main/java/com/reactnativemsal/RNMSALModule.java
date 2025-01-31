@@ -1,5 +1,10 @@
 package com.reactnativemsal;
 
+import java.util.Map;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -243,16 +248,22 @@ public class RNMSALModule extends ReactContextBaseJavaModule {
             }
 
             if (params.hasKey("extraQueryParameters")) {
-                List<Pair<String, String>> parameters = new ArrayList<>();
-                for (Map.Entry<String, Object> entry :
-                        params.getMap("extraQueryParameters").toHashMap().entrySet()) {
-                    parameters.add(new Pair<>(entry.getKey(), entry.getValue().toString()));
-                }
-                acquireTokenParameters.withAuthorizationQueryStringParameters(parameters);
+                    List<Map.Entry<String, String>> authorizationQueryStringParameters = new ArrayList<>();
+                    for (Map.Entry<String, Object> entry :
+                            params.getMap("extraQueryParameters").toHashMap().entrySet()) {
+                        authorizationQueryStringParameters.add(
+                            new AbstractMap.SimpleEntry<>(
+                                entry.getKey(),
+                                entry.getValue().toString()
+                            )
+                        );
+                    }
+                    acquireTokenParameters.withAuthorizationQueryStringParameters(authorizationQueryStringParameters);
             }
-
             acquireTokenParameters.withCallback(getAuthInteractiveCallback(promise));
             publicClientApplication.acquireToken(acquireTokenParameters.build());
+
+            
         } catch (Exception e) {
             promise.reject(e);
         }
