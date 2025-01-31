@@ -68,10 +68,6 @@ repositories {
     // Support for Android JSC
     url = "$rootDir/../node_modules/jsc-android/dist"
   }
-  maven {
-    // Facebook Maven repo for React Native
-    url = "https://mvnrepository.com/artifact/com.facebook.react/react-android"
-  }
   google()
   mavenCentral()
   maven { url = "https://www.jitpack.io" }
