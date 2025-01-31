@@ -3,7 +3,7 @@ name: Build and Publish to NPM
 on:
   push:
     branches: [ master ]
-  workflow_dispatch:  # Allows manual trigger
+  workflow_dispatch:
 
 jobs:
   build-and-publish:
@@ -14,14 +14,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'  # Update to use Node.js 20
           registry-url: 'https://registry.npmjs.org/'
       
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: |
+          npm install -g yarn
+          yarn install --ignore-engines
       
       - name: Build package
-        run: npm run build
+        run: yarn build
       
       - name: Publish to NPM
         run: npm publish --access public

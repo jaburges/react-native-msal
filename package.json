@@ -84,6 +84,10 @@
       "@commitlint/config-conventional"
     ]
   },
+  "engines": {
+    "node": ">=18",
+    "npm": ">=9"
+  },  
   "prettier": {
     "singleQuote": true,
     "tabWidth": 2,
